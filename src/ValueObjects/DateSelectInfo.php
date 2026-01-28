@@ -16,6 +16,8 @@ readonly class DateSelectInfo implements ContextualInfo
 
     public bool $allDay;
 
+    public mixed $resourceId;
+
     public CalendarView $view;
 
     protected array $originalData;
@@ -37,6 +39,11 @@ readonly class DateSelectInfo implements ContextualInfo
         );
 
         $this->allDay = data_get($data, 'allDay');
+
+        $resourceData = data_get($data, 'resource');
+        if ($resourceData !== null) {
+            $this->resourceId  = data_get($resourceData, 'id');
+        }
 
         $this->view = new CalendarView(
             data_get($data, 'view'),
